@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: podtinytidyid-webhook
+  namespace: podtinytidyid-webhook
+data:
+  podtinytidyid-conf.yml: |

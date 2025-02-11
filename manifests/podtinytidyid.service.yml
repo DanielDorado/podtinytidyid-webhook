@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: podtinytidyid-webhook
+  namespace: podtinytidyid-webhook
+spec:
+  selector:
+    app: podtinytidyid-webhook
+  ports:
+    - port: 443
+      targetPort: tls-alt
+      name: application

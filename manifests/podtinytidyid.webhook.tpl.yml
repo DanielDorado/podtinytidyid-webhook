@@ -1,0 +1,28 @@
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: "podtinytidyid-webhook"
+webhooks:
+  - name: "podtinytidyid-webhook.danieldorado.github.io"
+    rules:
+      - apiGroups: [""]
+        apiVersions: ["v1"]
+        operations: ["CREATE"]
+        resources: ["pods"]
+        scope: "Namespaced"
+    clientConfig:
+      service:
+        namespace: "podtinytidyid-webhook"
+        name: "podtinytidyid-webhook"
+        path: "/mutating-pod"
+      caBundle: <CA-BUNDLE>
+    admissionReviewVersions: ["v1", "v1beta1"]
+    sideEffects: None
+    timeoutSeconds: 5
+    failurePolicy: Fail
+    # Limiting objects to send to the webhook by label
+    objectSelector:
+        matchExpressions:
+          - key: "danieldorado.github.io/podtinytidyid-set"
+            operator: Exists

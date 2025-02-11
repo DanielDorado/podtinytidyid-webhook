@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: podtinytidyid-webhook
+  name: podtinytidyid-webhook
+  namespace: podtinytidyid-webhook
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: podtinytidyid-webhook
+  template:
+    metadata:
+      labels:
+        app: podtinytidyid-webhook
+    spec:
+      volumes:
+        - name: webhook-tls-certs
+          secret:
+            secretName: podtinytidyid-webhook-tls
+        - name: webhook-conf
+          configMap:
+            name: podtinytidyid-webhook
+      containers:
+        - image: localhost:5001/podtinytidyid:0.0.1
+          name: server
+          imagePullPolicy: Always
+          ports:
+            - name: tls-alt
+              containerPort: 8443
+          volumeMounts:
+            - mountPath: /data/certs
+              name: webhook-tls-certs
+              readOnly: true
+            - mountPath: /data/conf
+              name: webhook-conf
+              readOnly: true
