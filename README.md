@@ -82,7 +82,7 @@ other-set: "10"
 
 A sequential approach combined with storing the counters prevents collisions like:
 
-``` Mermaid
+```mermaid
 sequenceDiagram
     participant A as Webhook Thread 1
     participant B as Webhook Thread 2
