@@ -4,7 +4,7 @@ PodTinyTidyId is a Kubernetes Mutating Webhook that assigns short, sequential ID
 
 > **Note**: This is a prototype. In production, consider:
 > - Kubernetes API rate limits
-> - Possible identifier overflow when IDs reach the limit
+> - Possible identifier overflow when all the IDs are being used (improbable that you have so many pods if the ID is big enough)
 
 ---
 
